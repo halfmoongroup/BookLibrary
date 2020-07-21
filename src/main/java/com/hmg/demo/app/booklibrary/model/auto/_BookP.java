@@ -13,19 +13,21 @@ public abstract class _BookP extends CayenneDataObject {
 
     private static final long serialVersionUID = 1L; 
 
-    public static final String ID_PK_COLUMN = "id";
+    public static final String BOOK_ID_PK_COLUMN = "book_id";
 
-    public static final Property<String> AUTHOR = Property.create("author", String.class);
+    public static final Property<String> AUTHORS = Property.create("authors", String.class);
     public static final Property<String> BOOK_ID = Property.create("bookId", String.class);
-    public static final Property<Integer> PUBLISHED = Property.create("published", Integer.class);
-    public static final Property<String> PUBLISHER = Property.create("publisher", String.class);
+    public static final Property<String> IMAGE_URL = Property.create("imageUrl", String.class);
+    public static final Property<String> LANGUAGE_CODE = Property.create("languageCode", String.class);
+    public static final Property<Integer> ORIGINAL_PUBLICATION_YEAR = Property.create("originalPublicationYear", Integer.class);
+    public static final Property<String> SMALL_IMAGE_URL = Property.create("smallImageUrl", String.class);
     public static final Property<String> TITLE = Property.create("title", String.class);
 
-    public void setAuthor(String author) {
-        writeProperty("author", author);
+    public void setAuthors(String authors) {
+        writeProperty("authors", authors);
     }
-    public String getAuthor() {
-        return (String)readProperty("author");
+    public String getAuthors() {
+        return (String)readProperty("authors");
     }
 
     public void setBookId(String bookId) {
@@ -35,19 +37,33 @@ public abstract class _BookP extends CayenneDataObject {
         return (String)readProperty("bookId");
     }
 
-    public void setPublished(int published) {
-        writeProperty("published", published);
+    public void setImageUrl(String imageUrl) {
+        writeProperty("imageUrl", imageUrl);
     }
-    public int getPublished() {
-        Object value = readProperty("published");
+    public String getImageUrl() {
+        return (String)readProperty("imageUrl");
+    }
+
+    public void setLanguageCode(String languageCode) {
+        writeProperty("languageCode", languageCode);
+    }
+    public String getLanguageCode() {
+        return (String)readProperty("languageCode");
+    }
+
+    public void setOriginalPublicationYear(int originalPublicationYear) {
+        writeProperty("originalPublicationYear", originalPublicationYear);
+    }
+    public int getOriginalPublicationYear() {
+        Object value = readProperty("originalPublicationYear");
         return (value != null) ? (Integer) value : 0;
     }
 
-    public void setPublisher(String publisher) {
-        writeProperty("publisher", publisher);
+    public void setSmallImageUrl(String smallImageUrl) {
+        writeProperty("smallImageUrl", smallImageUrl);
     }
-    public String getPublisher() {
-        return (String)readProperty("publisher");
+    public String getSmallImageUrl() {
+        return (String)readProperty("smallImageUrl");
     }
 
     public void setTitle(String title) {
