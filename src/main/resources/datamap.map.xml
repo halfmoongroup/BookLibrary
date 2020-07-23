@@ -9,21 +9,14 @@
 		<db-attribute name="authors" type="VARCHAR" length="256"/>
 		<db-attribute name="book_id" type="INTEGER" isPrimaryKey="true" isMandatory="true" length="10"/>
 		<db-attribute name="image_url" type="VARCHAR" length="256"/>
-<<<<<<< HEAD
 		<db-attribute name="language_code" type="VARCHAR" length="16"/>
-=======
-		<db-attribute name="language_code" type="VARCHAR" length="8"/>
->>>>>>> a4e87ba90bee43116ac92b8300ddacfc71d3a1a9
+
 		<db-attribute name="original_publication_year" type="INTEGER" length="10"/>
 		<db-attribute name="small_image_url" type="VARCHAR" length="256"/>
 		<db-attribute name="title" type="VARCHAR" length="256"/>
 	</db-entity>
 	<obj-entity name="BookP" className="com.hmg.demo.app.booklibrary.model.BookP" dbEntityName="book">
-<<<<<<< HEAD
 		<obj-attribute name="author" type="java.lang.String" db-attribute-path="authors"/>
-=======
-		<obj-attribute name="authors" type="java.lang.String" db-attribute-path="authors"/>
->>>>>>> a4e87ba90bee43116ac92b8300ddacfc71d3a1a9
 		<obj-attribute name="bookId" type="java.lang.String" db-attribute-path="book_id"/>
 		<obj-attribute name="imageUrl" type="java.lang.String" db-attribute-path="image_url"/>
 		<obj-attribute name="languageCode" type="java.lang.String" db-attribute-path="language_code"/>
