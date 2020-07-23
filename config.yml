@@ -9,5 +9,5 @@ jdbc:
       jdbcUrl: "jdbc:postgresql://localhost:5432/info"
       driverClassName: org.postgresql.Driver
       maximumPoolSize: 1
-      username: glorp
+      username: glorp	
       password: password
