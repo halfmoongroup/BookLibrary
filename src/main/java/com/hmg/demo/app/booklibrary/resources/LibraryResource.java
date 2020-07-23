@@ -1,8 +1,6 @@
 package com.hmg.demo.app.booklibrary.resources;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,6 +10,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.cayenne.ObjectContext;
+import org.apache.cayenne.configuration.server.ServerRuntime;
+import org.apache.cayenne.query.ObjectSelect;
+import org.apache.cayenne.validation.ValidationFailure;
+import org.apache.cayenne.validation.ValidationResult;
+
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.hmg.demo.app.booklibrary.api.Book;
@@ -20,18 +24,11 @@ import com.hmg.demo.app.booklibrary.api.BookList;
 import com.hmg.demo.app.booklibrary.model.BookP;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.ApiResponse;
-
+import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Info;
 import io.swagger.annotations.SwaggerDefinition;
 import io.swagger.annotations.Tag;
-
-import org.apache.cayenne.ObjectContext;
-import org.apache.cayenne.configuration.server.ServerRuntime;
-import org.apache.cayenne.query.ObjectSelect;
-import org.apache.cayenne.validation.ValidationFailure;
-import org.apache.cayenne.validation.ValidationResult;
 
 @Path("/library")
 @Api(tags= {"Book Management"})
@@ -67,8 +64,7 @@ public class LibraryResource {
 		BookList bookList = new BookList();
 		if ((bookPList != null) && (bookPList.size() > 0)) {
  			for(BookP aBook : bookPList) {
- 				Book apiBook = aBook.getApiBook();
- 				bookList.addBook(apiBook);
+ 				bookList.addBook(aBook.getApiBook());
 			}
 		}
 		r = Response.status(Response.Status.OK).entity(bookList).build();
@@ -136,6 +132,5 @@ public class LibraryResource {
 
 		return r;
 	}
-	
-	
+		
 }

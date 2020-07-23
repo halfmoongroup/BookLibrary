@@ -3,22 +3,19 @@ package com.hmg.demo.app.booklibrary.api;
 public class Book {
 
 	private String title;
-	private String publisher;
 	private String author;
-	private Integer published;
+	private String imageUrl;
+	private String smallImageUrl;
+	private Integer originalPublicationYear;
 	private String bookId;
-	
+	private String languageCode;
+
+
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public String getPublisher() {
-		return publisher;
-	}
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
 	}
 	public String getAuthor() {
 		return author;
@@ -26,11 +23,23 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public Integer getPublished() {
-		return published;
+	public String getImageUrl() {
+		return imageUrl;
 	}
-	public void setPublished(Integer published) {
-		this.published = published;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	public String getSmallImageUrl() {
+		return smallImageUrl;
+	}
+	public void setSmallImageUrl(String smallImageUrl) {
+		this.smallImageUrl = smallImageUrl;
+	}
+	public Integer getOriginalPublicationYear() {
+		return originalPublicationYear;
+	}
+	public void setOriginalPublicationYear(Integer originalPublicationYear) {
+		this.originalPublicationYear = originalPublicationYear;
 	}
 	public String getBookId() {
 		return bookId;
@@ -38,10 +47,13 @@ public class Book {
 	public void setBookId(String bookId) {
 		this.bookId = bookId;
 	}
-	
+	public String getLanguageCode() {
+		return languageCode;
+	}
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
 	public boolean validateForCreate() {
-		
 		return true;
 	}
-
 }

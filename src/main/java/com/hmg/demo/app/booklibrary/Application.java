@@ -3,6 +3,7 @@ package com.hmg.demo.app.booklibrary;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.hmg.demo.app.booklibrary.resources.LibraryResource;
+import com.hmg.demo.app.booklibrary.resources.SearchResource;
 
 import io.bootique.Bootique;
 import io.bootique.cayenne.CayenneModule;
@@ -24,7 +25,8 @@ public class Application implements Module {
 	public void configure(Binder binder) {
 		
 		JerseyModule.extend(binder)
-        	.addResource(LibraryResource.class);
+        	.addResource(LibraryResource.class)
+        	.addResource(SearchResource.class);
 		
 		 CayenneModule.extend(binder)
 		    .addProject("cayenne-project.xml");

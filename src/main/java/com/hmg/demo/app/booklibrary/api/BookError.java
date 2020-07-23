@@ -1,7 +1,5 @@
 package com.hmg.demo.app.booklibrary.api;
 
-import javax.ws.rs.core.Response.Status;
-
 public class BookError {
 	
 	Integer code;
