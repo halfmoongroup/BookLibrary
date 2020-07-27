@@ -15,6 +15,7 @@ public abstract class _BookP extends CayenneDataObject {
 
     public static final String BOOK_ID_PK_COLUMN = "book_id";
 
+    public static final Property<Boolean> ACTIVE = Property.create("active", Boolean.class);
     public static final Property<String> AUTHOR = Property.create("author", String.class);
     public static final Property<String> BOOK_ID = Property.create("bookId", String.class);
     public static final Property<String> IMAGE_URL = Property.create("imageUrl", String.class);
@@ -22,6 +23,13 @@ public abstract class _BookP extends CayenneDataObject {
     public static final Property<Integer> ORIGINAL_PUBLICATION_YEAR = Property.create("originalPublicationYear", Integer.class);
     public static final Property<String> SMALL_IMAGE_URL = Property.create("smallImageUrl", String.class);
     public static final Property<String> TITLE = Property.create("title", String.class);
+
+    public void setActive(Boolean active) {
+        writeProperty("active", active);
+    }
+    public Boolean getActive() {
+        return (Boolean)readProperty("active");
+    }
 
     public void setAuthor(String author) {
         writeProperty("author", author);
@@ -72,5 +80,7 @@ public abstract class _BookP extends CayenneDataObject {
     public String getTitle() {
         return (String)readProperty("title");
     }
+
+    protected abstract void onPostAdd();
 
 }

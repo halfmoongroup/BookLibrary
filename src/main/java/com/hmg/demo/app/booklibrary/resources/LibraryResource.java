@@ -2,6 +2,7 @@ package com.hmg.demo.app.booklibrary.resources;
 
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -60,7 +61,8 @@ public class LibraryResource {
 		Response r = null;
 		ServerRuntime runtime = runtimeProvider.get();
 		ObjectContext context = runtime.newContext();
-		List<BookP> bookPList = ObjectSelect.query(BookP.class).select(context);
+		List<BookP> bookPList = ObjectSelect.query(BookP.class)
+				.where(BookP.ACTIVE.eq(true)).select(context);
 		BookList bookList = new BookList();
 		if ((bookPList != null) && (bookPList.size() > 0)) {
  			for(BookP aBook : bookPList) {
@@ -83,12 +85,40 @@ public class LibraryResource {
 		Response r = null;
 		ServerRuntime runtime = runtimeProvider.get();
 		ObjectContext context = runtime.newContext();
-		BookP aBook = ObjectSelect.query(BookP.class).where(BookP.BOOK_ID.eq(id)).selectOne(context);
+		BookP aBook = ObjectSelect.query(BookP.class).where(BookP.BOOK_ID.eq(id))
+				.and(BookP.ACTIVE.eq(true)).selectOne(context);
 		if (aBook == null) {
 			BookError error = new BookError(Response.Status.NOT_FOUND.getStatusCode(),"Book not found" );
 			r = Response.status(Response.Status.NOT_FOUND).entity(error).build();
 		} else {
 			Book apiBook = aBook.getApiBook();
+			r = Response.status(Response.Status.OK).entity(apiBook).build();
+		}
+		return r;
+	}
+	
+	@DELETE
+	@Path("/book/{id}")
+	@Produces("application/json")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "Get a book instance", response = Book.class ),
+		@ApiResponse(code = 400, message = "Invalid book id supplied", response = BookError.class),
+		@ApiResponse(code = 404, message = "Book not found", response = BookError.class) 
+		})
+	public Response deleteBook(@PathParam("id") String id) {
+		Response r = null;
+		ServerRuntime runtime = runtimeProvider.get();
+		ObjectContext context = runtime.newContext();
+		BookP aBook = ObjectSelect.query(BookP.class).where(BookP.BOOK_ID.eq(id))
+				.and(BookP.ACTIVE.eq(true)).selectOne(context);
+		if (aBook == null) {
+			BookError error = new BookError(Response.Status.NOT_FOUND.getStatusCode(),"Book not found" );
+			r = Response.status(Response.Status.NOT_FOUND).entity(error).build();
+		} else {
+			Book apiBook = aBook.getApiBook();
+			context.deleteObject(aBook);
+			context.commitChanges();
+			apiBook.setBookId(null);
 			r = Response.status(Response.Status.OK).entity(apiBook).build();
 		}
 		return r;

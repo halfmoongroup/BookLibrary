@@ -38,10 +38,15 @@ public class BookP extends _BookP {
 		try {
 			BeanUtils.copyProperties(aBook, this);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			log.info("problem copying properties");
 		} 
 		return aBook;
+	}
+
+
+	@Override
+	protected void onPostAdd() {
+		this.setActive(true);
 	} 
 
 }
