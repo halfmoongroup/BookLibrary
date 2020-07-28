@@ -8,6 +8,7 @@ public class Book {
 	private Integer originalPublicationYear;
 	private String bookId;
 	private String languageCode;
+	private String title;
 
 	public String getAuthor() {
 		return author;
@@ -60,4 +61,14 @@ public class Book {
 	public boolean validateForCreate() {
 		return true;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	
 }

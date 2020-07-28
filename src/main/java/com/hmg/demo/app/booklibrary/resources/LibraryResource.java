@@ -5,6 +5,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -116,13 +117,41 @@ public class LibraryResource {
 			r = Response.status(Response.Status.NOT_FOUND).entity(error).build();
 		} else {
 			Book apiBook = aBook.getApiBook();
-			context.deleteObject(aBook);
+			//context.deleteObject(aBook);
+			aBook.setActive(false);
 			context.commitChanges();
 			apiBook.setBookId(null);
 			r = Response.status(Response.Status.OK).entity(apiBook).build();
 		}
 		return r;
 	}
+	
+	@PUT
+	@Path("/book/{id}")
+	@Produces("application/json")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "Get a book instance", response = Book.class ),
+		@ApiResponse(code = 400, message = "Invalid book id supplied", response = BookError.class),
+		@ApiResponse(code = 404, message = "Book not found", response = BookError.class) 
+		})
+	public Response resetBook(@PathParam("id") String id) {
+		Response r = null;
+		ServerRuntime runtime = runtimeProvider.get();
+		ObjectContext context = runtime.newContext();
+		BookP aBook = ObjectSelect.query(BookP.class).where(BookP.BOOK_ID.eq(id)).selectOne(context);
+		if (aBook == null) {
+			BookError error = new BookError(Response.Status.NOT_FOUND.getStatusCode(),"Book not found" );
+			r = Response.status(Response.Status.NOT_FOUND).entity(error).build();
+		} else {
+			Book apiBook = aBook.getApiBook();
+			aBook.setActive(true);
+			context.commitChanges();
+			apiBook.setBookId(null);
+			r = Response.status(Response.Status.OK).entity(apiBook).build();
+		}
+		return r;
+	}
+
 
 	@POST
 	@Path("/book")
