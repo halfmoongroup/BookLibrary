@@ -37,6 +37,9 @@ public class BookP extends _BookP {
 		Book aBook = new Book();
 		try {
 			BeanUtils.copyProperties(aBook, this);
+			if (aBook.getLanguageCode() == null) {
+				aBook.setLanguageCode("en");
+			}
 		} catch (Exception e) {
 			log.info("problem copying properties");
 		} 
